@@ -44,4 +44,4 @@ class G4JLeicBeamLineMagnetDetector : public PHG4Detector
   std::string superdetector;
 };
 
-#endif //  G4JLEIC_PHG4BEAMLINEMAGNETMAGNETDETECTOR_H
+#endif  //  G4JLEIC_PHG4BEAMLINEMAGNETMAGNETDETECTOR_H

@@ -11,7 +11,7 @@
 #include <Geant4/G4String.hh>          // for G4String
 #include <Geant4/G4SystemOfUnits.hh>
 #include <Geant4/G4ThreeVector.hh>  // for G4ThreeVector
-#include <Geant4/G4Transform3D.hh>         // for G4Transform3D
+#include <Geant4/G4Transform3D.hh>  // for G4Transform3D
 #include <Geant4/G4VisAttributes.hh>
 
 #include <cmath>
@@ -67,7 +67,7 @@ void G4JLeicDIRCDetector::ConstructMe(G4LogicalVolume *logicWorld)
     G4RotationMatrix rot;
     rot.rotateZ(cb_DIRC_bars_deltaphi * ia);
     string physname = "cb_DIRC_bars_Phys_" + to_string(ia);
-    G4VPhysicalVolume *phy = new G4PVPlacement(G4Transform3D(rot, G4ThreeVector(x, y, -400)),
+    G4VPhysicalVolume *phy = new G4PVPlacement(G4Transform3D(rot, G4ThreeVector(x, y, 0)),
                                                logical, physname,
                                                logicWorld, ia, false, OverlapCheck());
     m_PhysicalVolumesSet.insert(phy);

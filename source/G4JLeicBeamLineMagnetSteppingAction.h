@@ -17,7 +17,7 @@ class G4JLeicBeamLineMagnetSteppingAction : public PHG4SteppingAction
 {
  public:
   //! constructor
-  G4JLeicBeamLineMagnetSteppingAction(G4JLeicBeamLineMagnetDetector*, const PHParameters *parameters);
+  G4JLeicBeamLineMagnetSteppingAction(G4JLeicBeamLineMagnetDetector*, const PHParameters* parameters);
 
   //! destructor
   virtual ~G4JLeicBeamLineMagnetSteppingAction();
