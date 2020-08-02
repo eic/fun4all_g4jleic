@@ -3,7 +3,7 @@
 
 #include <phparameter/PHParameters.h>
 
-#include <g4main/PHG4Detector.h>  // for PHG4Detector
+#include <g4main/PHG4Detector.h>       // for PHG4Detector
 #include <g4main/PHG4DisplayAction.h>  // for PHG4DisplayAction
 #include <g4main/PHG4Subsystem.h>
 #include <g4main/PHG4Utils.h>
@@ -69,7 +69,6 @@ int G4JLeicBeamLineMagnetDetector::IsInBeamLineMagnet(const G4VPhysicalVolume *v
 //_______________________________________________________________
 void G4JLeicBeamLineMagnetDetector::ConstructMe(G4LogicalVolume *logicMother)
 {
-
   /* Define origin vector (center of magnet) */
   G4ThreeVector origin(params->get_double_param("place_x") * cm,
                        params->get_double_param("place_y") * cm,
@@ -88,17 +87,17 @@ void G4JLeicBeamLineMagnetDetector::ConstructMe(G4LogicalVolume *logicMother)
   if (magnettype == "DIPOLE")
   {
     G4ThreeVector field(params->get_double_param("field_x") * tesla,
-			params->get_double_param("field_y") * tesla,
-			params->get_double_param("field_z") * tesla);
-// magnets can be rotated in y
+                        params->get_double_param("field_y") * tesla,
+                        params->get_double_param("field_z") * tesla);
+    // magnets can be rotated in y
     field.rotateY(params->get_double_param("rot_y") * deg);
     magField = new G4UniformMagField(field);
     if (Verbosity() > 0)
     {
       cout << "Creating DIPOLE with field x: " << field.x() / tesla
-	   << ", y: " << field.y() / tesla
-	   << ", z: " << field.z()/ tesla
-	   << " and name " << GetName() << endl;
+           << ", y: " << field.y() / tesla
+           << ", z: " << field.z() / tesla
+           << " and name " << GetName() << endl;
     }
   }
   else if (magnettype == "QUADRUPOLE")
@@ -120,25 +119,24 @@ void G4JLeicBeamLineMagnetDetector::ConstructMe(G4LogicalVolume *logicMother)
 
   if (!magField && Verbosity() > 0)
   {
-    cout << PHWHERE << " No magnetic field specified for " << GetName() 
-	 << " of type " << magnettype << endl;
+    cout << PHWHERE << " No magnetic field specified for " << GetName()
+         << " of type " << magnettype << endl;
   }
-
 
   /* Add volume with solid magnet material */
   G4VSolid *magnet_iron_solid = new G4Tubs(G4String(GetName().append("_Solid").c_str()),
-                                        0,
-					   params->get_double_param("outer_radius") * cm,
-                                        params->get_double_param("length") * cm / 2., 0, twopi);
+                                           0,
+                                           params->get_double_param("outer_radius") * cm,
+                                           params->get_double_param("length") * cm / 2., 0, twopi);
   G4LogicalVolume *magnet_iron_logic = new G4LogicalVolume(magnet_iron_solid,
-							G4Material::GetMaterial("G4_Fe"),
-                                                        G4String(GetName().c_str()),
-                                                        0, 0, 0);
-  m_DisplayAction->AddVolume(magnet_iron_logic,magnettype);
-  magnet_iron_physi = new G4PVPlacement(G4Transform3D(*rotm,origin),
-                                     magnet_iron_logic,
-                                     G4String(GetName().append("_Solid").c_str()),
-                                     logicMother, 0, false, OverlapCheck());
+                                                           G4Material::GetMaterial("G4_Fe"),
+                                                           G4String(GetName().c_str()),
+                                                           0, 0, 0);
+  m_DisplayAction->AddVolume(magnet_iron_logic, magnettype);
+  magnet_iron_physi = new G4PVPlacement(G4Transform3D(*rotm, origin),
+                                        magnet_iron_logic,
+                                        G4String(GetName().append("_Solid").c_str()),
+                                        logicMother, 0, false, OverlapCheck());
 
   G4VSolid *magnet_solid = new G4Tubs(G4String(GetName().c_str()),
                                       0,
@@ -164,7 +162,7 @@ void G4JLeicBeamLineMagnetDetector::ConstructMe(G4LogicalVolume *logicMother)
     fieldMgr->SetChordFinder(localChordFinder);
     magnet_logic->SetFieldManager(fieldMgr, true);
   }
-  m_DisplayAction->AddVolume(magnet_logic,"FIELDVOLUME");
+  m_DisplayAction->AddVolume(magnet_logic, "FIELDVOLUME");
 
   /* create magnet physical volume */
 
@@ -172,5 +170,4 @@ void G4JLeicBeamLineMagnetDetector::ConstructMe(G4LogicalVolume *logicMother)
                                    magnet_logic,
                                    G4String(GetName().c_str()),
                                    magnet_iron_logic, 0, false, OverlapCheck());
-
 }

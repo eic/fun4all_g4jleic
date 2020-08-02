@@ -126,8 +126,8 @@ void G4JLeicVTXSubsystem::SetDefaultParameters()
   set_default_double_param(0, "Dy", 2.);
   set_default_double_param(0, "Dz", 10.);
   set_default_double_param(0, "Rin", 3.5);
-  set_default_double_param(0, "PixelDx", 1.);  // dz/10. = 1.
-  set_default_double_param(0, "PixelDy", 2. / 50.);   // dy/50
+  set_default_double_param(0, "PixelDx", 1.);        // dz/10. = 1.
+  set_default_double_param(0, "PixelDy", 2. / 50.);  // dy/50
 
   set_default_double_param(1, "Dx", 0.005);
   set_default_double_param(1, "Dy", 2.);
@@ -164,7 +164,7 @@ void G4JLeicVTXSubsystem::SetDefaultParameters()
   set_default_double_param(5, "PixelDx", 48. / 50.);  // dz/50
   set_default_double_param(5, "PixelDy", 4. / 10.);   // dy/10
 
-// global parameters are stored under -1
+  // global parameters are stored under -1
   set_default_int_param(-1, "layers", 6);
   set_default_int_param(-1, "rows", 56);
   set_default_double_param(-1, "xsize", 0.8);
