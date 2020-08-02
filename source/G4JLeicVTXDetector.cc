@@ -52,7 +52,6 @@ int G4JLeicVTXDetector::IsInVTX(G4VPhysicalVolume *volume) const
 
 void G4JLeicVTXDetector::ConstructMe(G4LogicalVolume *logicWorld)
 {
-  cout << "constructing VTX" << endl;
   for (int ilayer = 0; ilayer < m_Layers; ilayer++)
   {
     // get parameters for this layer
@@ -102,7 +101,7 @@ void G4JLeicVTXDetector::ConstructMe(G4LogicalVolume *logicWorld)
       rot.rotateZ(-7. * deg);
       ostringstream physname;
       physname << "cb_VTX_ladder_Phys_" << ilayer << "_" << ia;
-      G4VPhysicalVolume *phy = new G4PVPlacement(G4Transform3D(rot, G4ThreeVector(x, y, -400)),
+      G4VPhysicalVolume *phy = new G4PVPlacement(G4Transform3D(rot, G4ThreeVector(x, y, 0)),
                                                  logical, physname.str(),
                                                  logicWorld, 0, false, OverlapCheck());
       // layer starts at zero but needs to be positive to mark active volume
